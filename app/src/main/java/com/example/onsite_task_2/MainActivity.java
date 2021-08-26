@@ -52,4 +52,9 @@ public class MainActivity extends AppCompatActivity implements Operation_fragmen
     public void clear() {
         result_fragment.clear();
     }
+
+    @Override
+    public void backspace() {
+        result_fragment.backspace();
+    }
 }

@@ -33,6 +33,7 @@ public class Operation_fragment extends Fragment {
         void sendOp(String operator);
         void getResult();
         void clear();
+        void backspace();
     }
 
     public Operation_fragment() {
@@ -58,7 +59,7 @@ public class Operation_fragment extends Fragment {
     }
 
     Button[] numbers;
-    Button add,subtract,multiply,divide,equals,clear,dot;
+    Button add,subtract,multiply,divide,equals,clear,dot,backspace;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class Operation_fragment extends Fragment {
         divide=view.findViewById(R.id.btn_divide);
         equals=view.findViewById(R.id.btn_equals);
         clear=view.findViewById(R.id.btn_clear);
+        backspace=view.findViewById(R.id.btn_backspace);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +132,12 @@ public class Operation_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 callback.clear();
+            }
+        });
+        backspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.backspace();
             }
         });
 
