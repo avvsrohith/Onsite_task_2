@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,12 @@ public class Result_fragment extends Fragment  {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    TextView result;
-    String resulttext="";
+    TextView display,result;
+    View view;
+    float[] value;
+    int i=0;
+    float answer=0;
+    String displaytext ="",valueText="",resultText,Operator;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -60,16 +65,85 @@ public class Result_fragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_result_fragment, container, false);
+        view=inflater.inflate(R.layout.fragment_result_fragment, container, false);
+        display=view.findViewById(R.id.displaytv);
         result=view.findViewById(R.id.resulttv);
-
+        value=new float[100];
 
         return inflater.inflate(R.layout.fragment_result_fragment, container, false);
     }
 
-    public void getDigit(int digit){
-        resulttext+=String.valueOf(digit);
-        result.setText(resulttext);
+    public void getDigit(String digit){
+        displaytext +=digit;
+        valueText+=digit;
+        display = getView().findViewById(R.id.displaytv);
+        display.setText(displaytext);
     }
+
+    public void getOp(String operator){
+        Operator=operator;
+        if(!operator.equals("=")){
+            displaytext+=operator;
+            display = getView().findViewById(R.id.displaytv);
+            display.setText(displaytext);}
+
+        if(valueText.equals("")){
+            Operator=operator;
+            return;
+        }
+
+
+        value[i++]=Float.parseFloat(valueText);
+        if(i>1){
+            displayResult();
+        }
+        valueText="";
+
+    }
+
+    public void getResult(){
+        value[i++]=Float.parseFloat(valueText);
+        valueText="";
+        displayResult();
+    }
+
+    public void displayResult(){
+        if(answer==0){
+            answer=value[i-2];
+        }
+        switch (Operator){
+            case "+":
+                answer+=value[i-1];
+                break;
+            case "-":
+                answer-=value[i-1];
+                break;
+            case "*":
+                answer*=value[i-1];
+                break;
+            case "/":
+                answer/=value[i-1];
+                break;
+        }
+        resultText=String.valueOf(answer);
+        result=getView().findViewById(R.id.resulttv);
+        result.setText(resultText);
+    }
+
+
+    public void clear(){
+        displaytext="";
+        resultText="";
+        valueText="";
+        value=new float[100];
+        answer=0;
+        i=0;
+        result=getView().findViewById(R.id.resulttv);
+        result.setText(resultText);
+        display = getView().findViewById(R.id.displaytv);
+        display.setText(displaytext);
+    }
+
+
 
 }

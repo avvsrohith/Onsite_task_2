@@ -32,8 +32,24 @@ public class MainActivity extends AppCompatActivity implements Operation_fragmen
         }
     }
 
+
     @Override
-    public void send(int digit) {
+    public void send(String digit) {
         result_fragment.getDigit(digit);
+    }
+
+    @Override
+    public void sendOp(String operator) {
+        result_fragment.getOp(operator);
+    }
+
+    @Override
+    public void getResult() {
+        result_fragment.getResult();
+    }
+
+    @Override
+    public void clear() {
+        result_fragment.clear();
     }
 }

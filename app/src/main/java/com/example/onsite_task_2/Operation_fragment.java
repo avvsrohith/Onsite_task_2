@@ -29,7 +29,10 @@ public class Operation_fragment extends Fragment {
     Clicked callback;
 
     public interface Clicked{
-        void send(int digit);
+        void send(String digit);
+        void sendOp(String operator);
+        void getResult();
+        void clear();
     }
 
     public Operation_fragment() {
@@ -55,6 +58,7 @@ public class Operation_fragment extends Fragment {
     }
 
     Button[] numbers;
+    Button add,subtract,multiply,divide,equals,clear,dot;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,65 +87,118 @@ public class Operation_fragment extends Fragment {
         numbers[7]=view.findViewById(R.id.btn_7);
         numbers[8]=view.findViewById(R.id.btn_8);
         numbers[9]=view.findViewById(R.id.btn_9);
+        dot=view.findViewById(R.id.btn_dot);
+        add=view.findViewById(R.id.btn_plus);
+        subtract=view.findViewById(R.id.btn_minus);
+        multiply=view.findViewById(R.id.btn_multiply);
+        divide=view.findViewById(R.id.btn_divide);
+        equals=view.findViewById(R.id.btn_equals);
+        clear=view.findViewById(R.id.btn_clear);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.sendOp("+");
+            }
+        });
+
+        subtract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.sendOp("-");
+            }
+        });
+        multiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.sendOp("*");
+            }
+        });
+        divide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.sendOp("/");
+            }
+        });
+        equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.getResult();
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.clear();
+            }
+        });
+
+
 
         numbers[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(0);
+                callback.send("0");
             }
         });
         numbers[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(1);
+                callback.send("1");
             }
         });
         numbers[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(2);
+                callback.send("2");
             }
         });
         numbers[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(3);
+                callback.send("3");
             }
         });
         numbers[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(4);
+                callback.send("4");
             }
         });
         numbers[5].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(5);
+                callback.send("5");
             }
         });
         numbers[6].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(6);
+                callback.send("6");
             }
         });
         numbers[7].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(7);
+                callback.send("7");
             }
         });
         numbers[8].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(8);
+                callback.send("8");
             }
         });
         numbers[9].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.send(9);
+                callback.send("9");
+            }
+        });
+        dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.send(".");
             }
         });
 
